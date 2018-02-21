@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.darylkurtz.modularalarm">
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!--
+// TODO (1) Make a MainActivity into a settings component to allow for customization of the widget
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        -->
+
+        <receiver android:name="ModularAlarmAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED" />
+                <action android:name="android.intent.action.SET_ALARM" />
+                <action android:name="android.intent.action.ACTION_WIDGET_RECEIVER" />
+                <action android:name="com.darylkurtz.modularalarm.BUTTON1_ACTION" />
+                <action android:name="com.darylkurtz.modularalarm.BUTTON2_ACTION" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_details" />
+        </receiver>
+
+    </application>
+
+</manifest>

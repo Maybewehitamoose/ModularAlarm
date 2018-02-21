@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Modular Alarm</string>
+    <string name="undefined_alarm_time">\??:??</string>
+    <string name="alarm_time">--:--</string>
+</resources>
