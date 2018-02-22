@@ -27,11 +27,11 @@ public class ModularAlarmAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate( Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds )
     {
         // Call the intents for the button actions
-        Intent button5Intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+        Intent button3Intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
 
         PendingIntent pendingButton1Intent = PendingIntent.getBroadcast(context, 0, tapIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent pendingButton2Intent = PendingIntent.getBroadcast(context, 0, tapIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent pendingButton3Intent = PendingIntent.getActivity(context, 0, button5Intent, 0);
+        PendingIntent pendingButton3Intent = PendingIntent.getActivity(context, 0, button3Intent, 0);
 
 
         // String to define the next scheduled alarm
@@ -65,22 +65,38 @@ public class ModularAlarmAppWidgetProvider extends AppWidgetProvider {
         // TODO (3) Update functions below after settings panel is implemented to allow for custom alarm variable
         //Determine current time and add two hours, then set alarm
         if ( TAP_INTENT1.equals( intent.getAction() ) ) {
-            Integer plusOneHour = getCurrentHour() + 2;
+            Integer plusTwoHours;
+
+            //Make sure hour returned is not greater than 24
+            if (getCurrentHour() + 2 >= 24) {
+                plusTwoHours = getCurrentHour() - 22;
+            } else {
+                plusTwoHours = getCurrentHour() + 2;
+            }
+
             Integer carryTheMinutes = getCurrentMinutes();
             Intent setAlarm1Hour = new Intent(AlarmClock.ACTION_SET_ALARM);
             setAlarm1Hour.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            setAlarm1Hour.putExtra(AlarmClock.EXTRA_HOUR, plusOneHour);
+            setAlarm1Hour.putExtra(AlarmClock.EXTRA_HOUR, plusTwoHours);
             setAlarm1Hour.putExtra(AlarmClock.EXTRA_MINUTES, carryTheMinutes);
             context.startActivity(setAlarm1Hour);
         }
 
         //Determine current time and add four hours, then set alarm
         if ( TAP_INTENT2.equals( intent.getAction() ) ) {
-            Integer plusOneHour = getCurrentHour() + 4;
+            Integer plusFourHours;
+
+            //Make sure hour returned is not greater than 24
+            if (getCurrentHour() + 4 >= 24) {
+                plusFourHours = getCurrentHour() - 20;
+            } else {
+                plusFourHours = getCurrentHour() + 4;
+            }
+
             Integer carryTheMinutes = getCurrentMinutes();
             Intent setAlarm1Hour = new Intent(AlarmClock.ACTION_SET_ALARM);
             setAlarm1Hour.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            setAlarm1Hour.putExtra(AlarmClock.EXTRA_HOUR, plusOneHour);
+            setAlarm1Hour.putExtra(AlarmClock.EXTRA_HOUR, plusFourHours);
             setAlarm1Hour.putExtra(AlarmClock.EXTRA_MINUTES, carryTheMinutes);
             context.startActivity(setAlarm1Hour);
         }
